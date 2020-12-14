@@ -1,24 +1,15 @@
 class Solution {
 public:
-    int mess(int i , int a , int b){
-        if (i)
-            return a < b;
-        else
-            return a > b;
-    }
     int wiggleMaxLength(vector<int>& nums) {
-        if(nums.size() < 2) return nums.size();
-        int last = nums[0],len1 = 1,len2 = 1;
-        for (int i = 1; i < nums.size(); i++) {
-            if(last == nums[i])
-                continue;
-            if (mess(len1%2, last, nums[i]))
-                len1++;
-            if (!mess(len2%2, last, nums[i])) {
-                len2++;
-            }
-            last = nums[i];
+        int n = nums.size();
+        if(!n)return 0;
+        int up = 1,down = 1;
+        for(int i = 1;i < n; ++i){
+            if(nums[i] < nums[i-1])
+                down=max(down,up+1);
+            else if(nums[i] > nums[i-1])
+                up = max(up,down+1);
         }
-        return max(len2,len1);
+        return max(up,down);
     }
 };
