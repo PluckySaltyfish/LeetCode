@@ -19,7 +19,7 @@ public:
             return;
         }
         for(int i = 0;i < 10; ++i){
-            if(i==0&&num.length()==0)
+            if(i==0&&num.length()==0) //以0开头都不算入num中
                 dfs(x+1,n,num);
             else{
                 char pos = '0' + i ;
