@@ -1,3 +1,4 @@
+//等长窗口+字典
 class Solution {
 public:
     int s1_dic[26] = {0};
@@ -28,4 +29,26 @@ public:
         return true;
     }
 };
-//等长窗口+字典
+
+//双指针
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int n = s1.length();
+        vector<int>a1(26,0);
+        for(auto c : s1)
+            a1[c -'a']++;
+        int left = 0,right = 0;
+        vector<int>a2(a1);
+        while(right < s2.size()){
+            a2[s2[right] - 'a']--;
+            while(a2[s2[right] - 'a']< 0){
+                a2[s2[left] - 'a']++;
+                left++;
+            }
+            if(n == right - left + 1)return true;
+            right++;
+        }
+        return false;
+    }
+};
