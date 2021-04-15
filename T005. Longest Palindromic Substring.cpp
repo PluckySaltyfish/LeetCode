@@ -27,3 +27,26 @@ public:
         return s.substr((center - len)/2,len - 1);
     }
 };
+//dp
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.length();
+        vector<vector<int>>dp(n,vector<int>(n,1));
+        int len = 1;
+        string ans(1,s[0]);
+        for(int i = n - 1;i >= 0; --i){
+            for(int j = i + 1; j < n; ++j){
+                if(s[i]!=s[j] || dp[i+1][j-1] == 0)
+                    dp[i][j] = 0;
+                if(dp[i][j]==1){
+                    if(len < j - i + 1){
+                        len = j - i + 1;
+                        ans = s.substr(i,j - i + 1);
+                    }
+                }
+            }
+        }
+        return ans; 
+    }
+};
